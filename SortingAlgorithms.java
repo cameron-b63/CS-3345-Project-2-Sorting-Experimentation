@@ -55,8 +55,8 @@ public class SortingAlgorithms{
         int j = right-1;
         // Actually quicksort
         for( ; ; ){
-            while(arr[++i] >= pivot){ }
-            while(arr[--j] <= pivot){ }
+            while(arr[++i] > pivot){ }
+            while(arr[--j] < pivot){ }
             if(i < j)
                 swap(arr, i, j);
             else
@@ -65,7 +65,7 @@ public class SortingAlgorithms{
 
         // Recurse
         quicksort(arr, left, i-1);
-        quicksort(arr, i+1, right);
+        quicksort(arr, i, right);
     }
 
     // Recursively defined "divide" of the mergesort divide and conquer
@@ -104,24 +104,23 @@ public class SortingAlgorithms{
 
     // Quicksort initialization wrapper(to abstract the method in the driver code)
     public static void quicksort(int[] arr){
+        if(arr.length < 2) return;
         quicksort(arr, 0, arr.length-1);
     }
 
     // Mergesort initialization wrapper(to abstract the method in the driver code)
     public static void mergesort(int[] arr){
+        if(arr.length < 2) return;
         int[] temp = new int[arr.length];
         mergesort(arr, temp, 0, arr.length-1);
     }
 
     // public-facing method to print the entire array, and in the process double check it was correctly sorted.
     public static void printArray(int[] arr){
-        boolean sorted = true;
         System.out.print("[");
         for(int i = 0; i < arr.length-1; i++){
-            if(arr[i] > arr[i+1]) sorted = false;
             System.out.print(arr[i] + ", ");
         }
         System.out.print(arr[arr.length-1] + "]\n");
-        System.out.println("The array is sorted: " + sorted + '\n');
     }
 }
